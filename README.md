@@ -70,14 +70,38 @@ src/
 
 ## Get Started
 
-1.Run an implemented model
+1. Run an implemented model
 
 ```bash
 chmod u+x run.sh
 ./run.sh
 ```
 
-2.
+2. Modify and run a script as follow (examples are in `run/`):
+
+```
+python main.py \
+--true_align data/arenas/arenas_edges-mapping-permutation.txt \
+--combined_graph data/arenas/arenas_combined_edges.txt \
+--embmethod xnetMF \
+--alignmethod CONE \
+--refinemethod RefiNA 
+```
+
+3. If you want to adjust the architecture of the model yourself, or set the parameters of each part of Encoder or Decoder, you can do so on the 'main.py' as follows (take CONE as Encoder and RefiNA as Decoder, search by greed_match):
+```python
+from encoder.CONE.CONE import CONE
+from decoder.RefiNA.RefiNA import RefiNA
+
+encoder = CONE(adjA, adjB, dim=64,window=10,negative=1.0,niter_init=10,reg_init=1.0, \
+                 lr=1.0,bsz=10,nepoch=5,embsim="euclidean",numtop=10,reg_align=0.05,niter_align=10)
+alignment_matrix = encoder.align()
+
+decoder = RefiNA(alignment_matrix, adjA, adjB, token_match=1, n_update=1, iter=100)
+alignment_matrix = decoder.refine_align()
+
+score, _ = refina_utils.score_alignment_matrix(alignment_matrix, topk = 1, true_alignments = true_align)
+```
 
 ## Acknowledgement
 The Code base is built upon the following work -
