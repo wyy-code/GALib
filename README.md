@@ -1,9 +1,9 @@
-# NATool
+# NATool： A Network Alignment Toolkit
 Introducing Network Alignment Toolkit (NAToll): a lightweight, user-friendly, and highly versatile PyTorch library for implementing various network alignment algorithms. With NAToll, you can effortlessly align networks and leverage its extensive range of functionalities.
 
-# Library for Network Alignment (Graph Alignment)
 ## Overview
-We have developed NATool, an open-source library for network alignment, using Python and PyTorch. The software architecture is depicted in the following Figure, showcasing the robustness and efficiency of NATool's design. To facilitate the integration of representative models and enable third-party developers to extend it according to their specific requirements, we abstract this framework into two main components: Encoder and Decoder. The Encoder takes the structural information of two graphs as input, with the option to include label information, and outputs the similarity matrices of the two graphs. The Decoder processes the obtained similarity matrices to derive the final alignment matrix. The Decoder is followed by a search module for alignment tasks. To facilitate the extension to other downstream tasks such as multimodal alignment and graph representation learning, we extract the search module from the Decoder component, allowing third-party developers to modify it as needed. The output of the search module is the final evaluation metric results.
+
+We have developed NATool, an open-source library for network alignment, using Python and PyTorch. To facilitate the integration of representative models and enable third-party developers to extend it according to their specific requirements, we abstract this framework into two main components: Encoder and Decoder. The Encoder takes the structural information of two graphs as input, with the option to include label information, and outputs the similarity matrices of the two graphs. The Decoder processes the obtained similarity matrices to derive the final alignment matrix. The Decoder is followed by a search module for alignment tasks. To facilitate the extension to other downstream tasks such as multimodal alignment and graph representation learning, we extract the search module from the Decoder component, allowing third-party developers to modify it as needed. The output of the search module is the final evaluation metric results.
 
 ## Algorithms
 
@@ -27,6 +27,16 @@ We integrate eleven representative network-alignment as Encoder and deocder. The
 |  CAPER  |  [arXiv'2022](https://arxiv.org/abs/2208.10682)  |
 |  Greed-Match  |  [-](-)   |
 |  Sinkhorn  | [-](-)  |
+
+## Datasets
+
+We have standardized the format of the experimental data, and more information about the datasets can be accessed at [CAPER](https://github.com/GemsLab/CAPER).
+
+| Name Nodes | Edges  | Description
+| [Arenas](https://dl.acm.org/doi/abs/10.1145/2487788.2488173) | 1,133 | 5,451 | communication network
+| [Hamsterster](https://dl.acm.org/doi/abs/10.1145/2487788.2488173) | 2,426 | 16,613 | social network
+| [Facebook](http://snap.stanford.edu/data/) | 4,039 | 88,234 | social network
+| [Magna](https://academic.oup.com/bioinformatics/article/30/20/2931/2422208?login=false) | 1,004 | 8,323 | protein-protein interaction
 
 ## Acknowledgement
 The Code base is built upon the following work -
