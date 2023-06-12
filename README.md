@@ -1,5 +1,5 @@
 # NATool： A Network Alignment Toolkit
-Introducing Network Alignment Toolkit (NATool): a lightweight, user-friendly, and highly versatile PyTorch library for implementing various network alignment algorithms. With NAToll, you can effortlessly align networks and leverage its extensive range of functionalities.
+Introducing Network Alignment Toolkit (NATool): a lightweight, user-friendly, and highly versatile PyTorch library for implementing various network alignment algorithms. With NATool, you can effortlessly align networks and leverage its extensive range of functionalities.
 
 # Overview
 
