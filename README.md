@@ -22,7 +22,7 @@ We integrate eleven representative network-alignment as Encoder and deocder. The
 | Grampa        | [ICML'2020](https://dl.acm.org/doi/abs/10.5555/3524938.3525218) |
 |  Grasp        |    [APWeb-WAIM'2021](https://link.springer.com/chapter/10.1007/978-3-030-85896-4_4)    |
 | B-Grasp        | [TKDD'2023](https://dl.acm.org/doi/full/10.1145/3561058) |
-|   Decoder   |     Paper     |
+|   **Decoder**   |     **Paper**     |
 |  RefiNA  |  [SIAM'2021](https://epubs.siam.org/doi/abs/10.1137/1.9781611976700.20)  |
 |  CAPER  |  [arXiv'2022](https://arxiv.org/abs/2208.10682)  |
 |  Greed-Match  |  [-](-)   |
