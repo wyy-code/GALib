@@ -33,6 +33,7 @@ We integrate eleven representative network-alignment as Encoder and deocder. The
 We have standardized the format of the experimental data, and more information about the datasets can be accessed at [CAPER](https://github.com/GemsLab/CAPER).
 
 | Name Nodes | Edges  | Description
+|:--------:|:-------:|:--------:|
 | [Arenas](https://dl.acm.org/doi/abs/10.1145/2487788.2488173) | 1,133 | 5,451 | communication network
 | [Hamsterster](https://dl.acm.org/doi/abs/10.1145/2487788.2488173) | 2,426 | 16,613 | social network
 | [Facebook](http://snap.stanford.edu/data/) | 4,039 | 88,234 | social network
