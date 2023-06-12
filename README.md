@@ -47,11 +47,12 @@ This section provides instructions on obtaining a copy of the library, as well a
 
 ```
 src/
-├── openea/
-│   ├── approaches/: package of the implementations for existing embedding-based entity alignment approaches
-│   ├── models/: package of the implementations for unexplored relationship embedding models
-│   ├── modules/: package of the implementations for the framework of embedding module, alignment module, and their interaction
-│   ├── expriment/: package of the implementations for evalution methods
+├── NATool/
+│   ├── encoder/: package of the implementations for existing representative network alignment approaches
+│   ├── decoder/: package of the implementations for refining simiarlity matrix approaches
+│   ├── matcher/: package of the implementations for the search utils of framework, search module, and their interaction
+│   ├── input/: package of the components for datasets process
+│   ├── utils/: package of the components for this framework
 ```
 
 ## Requirements
@@ -66,6 +67,17 @@ src/
 - theano (1.0.5) 
 - pymanopt(0.2.5) 
 - pandas(1.1.3) 
+
+## Get Started
+
+1.Run an implemented model
+
+```bash
+chmod u+x run.sh
+./run.sh
+```
+
+2.
 
 ## Acknowledgement
 The Code base is built upon the following work -
