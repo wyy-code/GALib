@@ -228,6 +228,8 @@ def main(args):
         # matcher.sinkhorn_match(alignment_matrix)
         # greedy_match_acc = metrics.get_statistics(pred, groundtruth_matrix)
         # print("Accuracy: %.4f" % greedy_match_acc)
+
+
     # evaluation
     # total_time = (after_align - before_align) + (after_emb - before_emb)
     # print(("score for NA: %f" % score))
