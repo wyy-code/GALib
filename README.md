@@ -77,7 +77,7 @@ chmod u+x run.sh
 ./run.sh
 ```
 
-2. Modify and run a script as follow (examples are in `run/`):
+2. Modify and run a script as follows (examples are in `run/`):
 
 ```
 python main.py \
@@ -104,8 +104,9 @@ score, _ = refina_utils.score_alignment_matrix(alignment_matrix, topk = 1, true_
 ```
 
 ## Acknowledgement
-The Code base is built upon the following work -
+The Codebase is built upon the following work -
 - [thanhtrunghuynh93](https://github.com/thanhtrunghuynh93/networkAlignment)
 - [constantinosskitsas](https://github.com/constantinosskitsas/Framework_GraphAlignment)
 - [CAPER](https://github.com/GemsLab/CAPER)
+We appreciate them and many other related works for their open-source contributions.
 
