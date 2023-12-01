@@ -9,7 +9,7 @@ We have developed NATool, an open-source library for network alignment, using Py
 
 We integrate eleven representative network-alignment as Encoder and deocder. Their papers and the original codes are given in the following table.
 
-|   Encoder   |     Paper     |
+|   Encoder   |     Publish     |
 |:--------:|:------------:|
 |  Isorank     |    [PNAS'2008](https://www.pnas.org/content/105/35/12763)    |
 |  NSD       |    [IEEE'2012](https://ieeexplore.ieee.org/document/5975146)    |
