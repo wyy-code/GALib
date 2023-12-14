@@ -11,19 +11,19 @@ We integrate eleven representative network-alignment as Encoder and deocder. The
 
 |   Encoder   |     Paper     |     Publish     |
 |:--------:|:------------------------------------:|:------------:|
-|  Isorank     |         -           |    [PNAS'2008](https://www.pnas.org/content/105/35/12763)    |
+|  Isorank     |         Global alignment of multiple protein interaction networks with application to functional orthology detection           |    [PNAS'2008](https://www.pnas.org/content/105/35/12763)    |
 |  NSD       |          Network Similarity Decomposition (NSD): A Fast and Scalable Approach to Network Alignment            |    [IEEE'2012](https://ieeexplore.ieee.org/document/5975146)    |
 |  Big-Align  |         BIG-ALIGN: Fast Bipartite Graph Alignment           |  [IEEE'2013](https://ieeexplore.ieee.org/abstract/document/6729523)  |
-|  FINAL   |         -           |  [KDD '2016](https://dl.acm.org/doi/abs/10.1145/2939672.2939766)  |
-|  Regal     |         -           |    [CIKM '2018](https://dl.acm.org/doi/10.1145/3269206.3271788)    |
-|  LREA        |         -           |    [WWW '2018](https://dl.acm.org/doi/10.1145/3178876.3186128)    |
+|  FINAL   |         FINAL: Fast Attributed Network Alignment           |  [KDD '2016](https://dl.acm.org/doi/abs/10.1145/2939672.2939766)  |
+|  Regal     |         REGAL: Representation Learning-based Graph Alignment           |    [CIKM '2018](https://dl.acm.org/doi/10.1145/3269206.3271788)    |
+|  LREA        |         Low Rank Spectral Network Alignment           |    [WWW '2018](https://dl.acm.org/doi/10.1145/3178876.3186128)    |
 |  GWL  |         Gromov-Wasserstein Learning for Graph Matching and Node Embedding          |  [arXiv'2019](https://arxiv.org/abs/1901.06003)  |
-|  CΟΝΕ   |         -           |  [CIKM '2020](https://dl.acm.org/doi/10.1145/3340531.3412136)  |
-| Grampa        |         -           | [ICML'2020](https://dl.acm.org/doi/abs/10.5555/3524938.3525218) |
-|  Grasp        |         -           |    [APWeb-WAIM'2021](https://link.springer.com/chapter/10.1007/978-3-030-85896-4_4)    |
-| B-Grasp        |         -           | [TKDD'2023](https://dl.acm.org/doi/full/10.1145/3561058) |
+|  CΟΝΕ   |         CONE-Align: Consistent Network Alignment with Proximity-Preserving Node Embedding           |  [CIKM '2020](https://dl.acm.org/doi/10.1145/3340531.3412136)  |
+| Grampa        |         Spectral graph matching and regularized quadratic relaxations: algorithm and theory           | [ICML'2020](https://dl.acm.org/doi/abs/10.5555/3524938.3525218) |
+|  Grasp        |         GRASP: Graph Alignment Through Spectral Signatures           |    [APWeb-WAIM'2021](https://link.springer.com/chapter/10.1007/978-3-030-85896-4_4)    |
+| B-Grasp        |         GRASP: Scalable Graph Alignment by Spectral Corresponding Functions           | [TKDD'2023](https://dl.acm.org/doi/full/10.1145/3561058) |
 |   **Decoder**   |     **Paper**     |     **Publish**     |
-|  RefiNA  |         -           |  [SDM'2021](https://epubs.siam.org/doi/abs/10.1137/1.9781611976700.20)  |
+|  RefiNA  |         Refining Network Alignment to Improve Matched Neighborhood Consistency           |  [SDM'2021](https://epubs.siam.org/doi/abs/10.1137/1.9781611976700.20)  |
 |  CAPER  |         CAPER: Coarsen, Align, Project, Refine - A General Multilevel Framework for Network Alignment           |  [arXiv'2022](https://arxiv.org/abs/2208.10682)  |
 |  Greed-Match  |         -           |  [-](-)   |
 |  Sinkhorn  |         -           | [-](-)  |
