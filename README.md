@@ -1,9 +1,10 @@
-# NATool： A Network Alignment Toolkit
-Introducing Network Alignment Toolkit (NATool): a lightweight, user-friendly, and highly versatile PyTorch library for implementing various network alignment algorithms. With NATool, you can effortlessly align networks and leverage its extensive range of functionalities.
+# GALib：An Open Source Python Library for Graph Alignment
+Introducing Graph Alignment Python Library (GALib): 
+GALib is a lightweight, user-friendly, and highly versatile Python library for diverse graph alignment algorithms, which calls for finding a matching between the nodes of one graph and those of another graph, in a way that they correspond to each other by some fitness measure. With GALib, you can effortlessly align graphs and leverage its extensive range of functionalities.
 
 # Overview
 
-We have developed NATool, an open-source library for network alignment, using Python and PyTorch. To facilitate the integration of representative models and enable third-party developers to extend it according to their specific requirements, we abstract this framework into two main components: Encoder and Decoder. The Encoder takes the structural information of two graphs as input, with the option to include label information, and outputs the similarity matrices of the two graphs. The Decoder processes the obtained similarity matrices to derive the final alignment matrix. The Decoder is followed by a search module for alignment tasks. To facilitate the extension to other downstream tasks such as multimodal alignment and graph representation learning, we extract the search module from the Decoder component, allowing third-party developers to modify it as needed. The output of the search module is the final evaluation metric results (Hits@k and Accuracy\MNC).
+We have developed GALib, an open-source library for network alignment, using Python and PyTorch. To facilitate the integration of representative models and enable third-party developers to extend it according to their specific requirements, we abstract this framework into two main components: Encoder and Decoder. The Encoder takes the structural information of two graphs as input, with the option to include label information, and outputs the similarity matrices of the two graphs. The Decoder processes the obtained similarity matrices to derive the final alignment matrix. The Decoder is followed by a search module for alignment tasks. To facilitate the extension to other downstream tasks such as multimodal alignment and graph representation learning, we extract the search module from the Decoder component, allowing third-party developers to modify it as needed. The output of the search module is the final evaluation metric results (Hits@k and Accuracy\MNC).
 
 ## Algorithms
 
@@ -47,7 +48,7 @@ This section provides instructions on obtaining a copy of the library, as well a
 
 ```
 src/
-├── NATool/
+├── GALib/
 │   ├── encoder/: package of the implementations for existing representative network alignment approaches
 │   ├── decoder/: package of the implementations for refining simiarlity matrix approaches
 │   ├── matcher/: package of the implementations for the search utils of framework, search module, and their interaction
