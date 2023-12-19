@@ -1,6 +1,6 @@
-# GALib：An Open Source Python Library for Graph Alignment
+# GALib：An Open Source Python Library for Unrestricted Graph Alignment
 Introducing Graph Alignment Python Library (GALib): 
-GALib is a lightweight, user-friendly, and highly versatile Python library for diverse graph alignment algorithms, which calls for finding a matching between the nodes of one graph and those of another graph, in a way that they correspond to each other by some fitness measure. With GALib, you can effortlessly align graphs and leverage its extensive range of functionalities.
+GALib is a lightweight, user-friendly, and highly versatile Python library for diverse unrestricted graph alignment algorithms, which calls for finding a matching between the nodes of one graph and those of another graph, in a way that they correspond to each other by some fitness measure. With GALib, you can effortlessly align graphs and leverage its extensive range of functionalities.
 
 # Overview
 
