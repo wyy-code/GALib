@@ -1,10 +1,10 @@
-# GALib：An Open Source Python Library for Unrestricted Graph Alignment
+# GALib：An More User-Friendly and Highly Versatile Python Library for Graph Alignment
 Introducing Graph Alignment Python Library (GALib): 
 GALib is a lightweight, user-friendly, and highly versatile Python library for diverse unrestricted graph alignment algorithms, which calls for finding a matching between the nodes of one graph and those of another graph, in a way that they correspond to each other by some fitness measure. With GALib, you can effortlessly align graphs and leverage its extensive range of functionalities.
 
 # Overview
 
-We have developed GALib, an open-source library for network alignment, using Python and PyTorch. To facilitate the integration of representative models and enable third-party developers to extend it according to their specific requirements, we abstract this framework into two main components: Encoder and Decoder. The Encoder takes the structural information of two graphs as input, with the option to include label information, and outputs the similarity matrices of the two graphs. The Decoder processes the obtained similarity matrices to derive the final alignment matrix. The Decoder is followed by a search module for alignment tasks. To facilitate the extension to other downstream tasks such as multimodal alignment and graph representation learning, we extract the search module from the Decoder component, allowing third-party developers to modify it as needed. The output of the search module is the final evaluation metric results (Hits@k and Accuracy\MNC).
+We have developed GALib, an open-source library for network alignment, using Python and PyTorch. To facilitate the integration of representative models and enable third-party developers to extend it according to their specific requirements, we abstract this framework into two main components: Encoder and Decoder. The Encoder takes the structural information of two graphs as input, with the option to include label information, and outputs the similarity matrices of the two graphs. The Decoder processes the obtained similarity matrices to derive the final alignment matrix. The Decoder is followed by a search module for alignment tasks. To facilitate the extension to other downstream tasks such as multimodal alignment and graph representation learning, we extract the search module from the Decoder component, allowing third-party developers to modify it as needed. The output of the search module is the final evaluation metric results (Hits@k , MRR, and MNC).
 
 ## Algorithms
 

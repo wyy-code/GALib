@@ -1,0 +1,14 @@
+Source dataset info:
+Name: 
+Type: Graph
+Number of nodes: 3906
+Number of edges: 8164
+Average degree:   4.1802
+Target dataset info:
+Name: 
+Type: Graph
+Number of nodes: 1118
+Number of edges: 1511
+Average degree:   2.7030
+Ratio of neighbors in source are also neighbors in target: 0.3851
+Ratio of same feature groundtruth: 1.0000
