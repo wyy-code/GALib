@@ -1,6 +1,9 @@
 from Dataprocess.synthetic_graph import SyntheticGraph
 import argparse
 
+'''
+- generate_REGAL_synthetic_graph: generate a graph with the algorithms mentioned in REGAL paper.
+'''
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Erdos Renyi Graph Generation")
