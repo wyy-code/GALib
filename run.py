@@ -13,7 +13,6 @@ import scipy.sparse as sps
 import encoder.REGAL.xnetmf as xnetmf
 import encoder.REGAL.regal_utils as regal_utils
 from decoder.RefiNA.RefiNA import RefiNA
-# import decoder.RefiNA.refina as refina
 import decoder.refina_utils as refina_utils
 from encoder.FINAL.FINAL import FINAL
 from encoder.CONE.CONE import CONE
@@ -29,6 +28,7 @@ import torch.optim as optim
 from torch.optim import lr_scheduler
 from matcher import matcher,metrics
 import scipy
+from dataprocess.Dataset import Dataset
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Run CONE Align.")
@@ -62,27 +62,9 @@ def parse_args():
 
 
 def main(args):
-    true_align_name = args.true_align
-    with open(true_align_name, "rb") as true_alignments_file:
-        # for python3, you need to use latin1 as the encoding method
-        true_align = pickle.load(true_alignments_file, encoding = "latin1")
 
-    ##################### Load data ######################################
-    # running normal graph alignment methods
-    combined_graph_name = args.combined_graph
-    graph = nx.read_edgelist(combined_graph_name, nodetype=int, comments="%")
-    adj = nx.adjacency_matrix(graph, nodelist = range(graph.number_of_nodes()) ).todense().astype(float)
-    node_num = int(adj.shape[0] / 2)
-    adjA = np.array(adj[:node_num, :node_num])
-    split_idx = adjA.shape[0]
-    adjB = np.array(adj[node_num:, node_num:])
-
-    # print statistics data
-    print("---------------")
-    print(f"The number of nodes in a single graph is {node_num}")
-    print(f"The number of edges in a the graph A is {nx.from_numpy_matrix(adjA).number_of_edges()}")
-    print(f"The number of edges in a the graph B is {nx.from_numpy_matrix(adjB).number_of_edges()}")
-    print("---------------")
+    dataset = Dataset(args.combined_graph, args.true_align)
+    adjA, adjB = dataset.graph2adj()
 
     ##################### Proprocess if needed ######################################
     if (args.embmethod == "xnetMF"):
@@ -131,7 +113,7 @@ def main(args):
     before_align = time.time()
     # step2 and 3: align embedding spaces and match nodes with similar embeddings
     if args.alignmethod == 'REGAL':
-        emb1, emb2 = regal_utils.get_embeddings(embed, graph_split_idx=split_idx)
+        emb1, emb2 = regal_utils.get_embeddings(embed, graph_split_idx=adjA.shape[0])
         alignment_matrix = regal_utils.get_embedding_similarities(emb1, emb2, num_top = None)
     elif args.alignmethod == 'FINAL':
         encoder = FINAL(adjA, adjB)
@@ -204,15 +186,15 @@ def main(args):
                 adjA = sps.csr_matrix(adjA)
                 adjB = sps.csr_matrix(adjB)
                 # alignment_matrix = refina.refina(alignment_matrix, adjA, adjB, true_alignments = true_align) 
-                decoder = RefiNA(alignment_matrix, adjA, adjB, n_update=args.n_update,true_alignments = true_align)
+                decoder = RefiNA(alignment_matrix, adjA, adjB, n_update=args.n_update,true_alignments = dataset.groundtruth)
                 alignment_matrix = decoder.refine_align()  
                 print(f"args.refinemethod is {args.refinemethod}")    
     node_num = alignment_matrix.shape[0]
     after_align = time.time()
 
 
-    if true_align is not None:
-        score, _ = refina_utils.score_alignment_matrix(alignment_matrix, topk = 1, true_alignments = true_align)
+    if dataset.groundtruth is not None:
+        score, _ = refina_utils.score_alignment_matrix(alignment_matrix, topk = 1, true_alignments = dataset.groundtruth)
         mnc = refina_utils.score_MNC(alignment_matrix, adjA, adjB)
         print("Top 1 accuracy: %.5f" % score)
         print("MNC: %.5f" % mnc)

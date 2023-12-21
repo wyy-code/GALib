@@ -10,7 +10,7 @@ python run.py \
 --combined_graph data/arenas/arenas_combined_edges.txt \
 --embmethod xnetMF \
 --alignmethod CONE \
---refinemethod RefiNA 
+# --refinemethod RefiNA 
 
 # python run.py \
 # --true_align data/arenas/arenas_edges-mapping-permutation.txt \
