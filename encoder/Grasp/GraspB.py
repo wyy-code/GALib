@@ -1,27 +1,44 @@
 import numpy as np
+
 import scipy as sci
+
 import networkx as nx
+
 import time
+
 import scipy.sparse as sps
+
 try:
     import lapjv
 except:
     pass
 import os
-import fast_pagerank
-import contextlib
-from sklearn.preprocessing import normalize
-import argparse
-from scipy.sparse import csr_matrix, coo_matrix
-from sklearn.neighbors import KDTree
-import math
-import matplotlib.pyplot as plt
-#import base_align as ba
-#import munkres
-from . import base_align_pymanopt as ba
-#import base_align as ba
-from sklearn.neighbors import NearestNeighbors
 
+import fast_pagerank
+
+import contextlib
+
+from sklearn.preprocessing import normalize
+
+import argparse
+
+from scipy.sparse import csr_matrix, coo_matrix
+
+from sklearn.neighbors import KDTree
+
+import math
+
+import matplotlib.pyplot as plt
+
+#import base_align as ba
+
+#import munkres
+
+from . import base_align_pymanopt as ba
+
+#import base_align as ba
+
+from sklearn.neighbors import NearestNeighbors
 def sort_greedy_voting(match_freq):
     dist_platt=np.ndarray.flatten(match_freq)
     idx = np.argsort(dist_platt)#

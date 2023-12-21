@@ -30,10 +30,10 @@ class SyntheticGraph():
         np.random.seed = self.seed
 
 
-    def generate_random_clone_synthetic(self, p_new_connection, p_remove_connection, p_change_feats=None):
+    def generate_random_clone_synthetic(self, p_remove_connection, p_change_feats=None):
         print("===============")
         dataset = Dataset(self.networkx_dir)
-        G = self.random_clone_synthetic(dataset, p_new_connection, p_remove_connection, self.seed)
+        G = self.random_clone_synthetic(dataset, p_remove_connection, self.seed)
         self._save_graph(G, self.output_dir1, p_change_feats)
 
     def generate_REGAL_synthetic(self):
@@ -42,16 +42,16 @@ class SyntheticGraph():
     def _save_graph(self, G, output_dir, p_change_feats=None):
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
-            os.makedirs(output_dir+"/graphsage")
+            os.makedirs(output_dir)
             os.makedirs(output_dir+"/edgelist")
-        with open(os.path.join(output_dir,"graphsage/G.json"), "w+") as file:
+        with open(os.path.join(output_dir,"G.json"), "w+") as file:
             res = json_graph.node_link_data(G)
             file.write(json.dumps(res))
-        with open(os.path.join(output_dir,"graphsage/id2idx.json"), "w+") as file:
+        with open(os.path.join(output_dir,"id2idx.json"), "w+") as file:
             file.write(json.dumps(self._create_id2idx(G)))
         features = self._build_features(p_change_feats)
         if features is not None:
-            np.save(os.path.join(output_dir,"graphsage/feats.npy"), features)
+            np.save(os.path.join(output_dir,"feats.npy"), features)
         nx.write_edgelist(G, os.path.join(output_dir,"edgelist/edgelist"), delimiter=' ', data=False)
         print("Graph has been saved to ", self.output_dir1)
 
@@ -75,7 +75,7 @@ class SyntheticGraph():
             features = features_ori
         return features
     
-    def random_clone_synthetic(self, dataset, p_new_connection, p_remove_connection, seed):
+    def random_clone_synthetic(self, dataset, p_remove_connection, seed):
         np.random.seed = seed
         H = dataset.G.copy()
         adj = dataset.get_adjacency_matrix()

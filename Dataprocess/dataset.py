@@ -39,20 +39,10 @@ class Dataset:
 
     def _load_id2idx(self):
         id2idx_file = os.path.join(self.data_dir, 'id2idx.json')
-        conversion = type(self.G.nodes()[0])
         self.id2idx = {}
         id2idx = json.load(open(id2idx_file))
-        # print(conversion)
-        # print("Test Finished")
-        # exit()
         for k, v in id2idx.items():
-            # self.id2idx[conversion(k)] = v
             self.id2idx[k] = v
-        # for k, v in id2idx.items():
-        #     try:
-        #         self.id2idx[conversion(k)] = v
-        #     except ValueError:
-        #         print(f"{k} and {v}")
 
     def _load_features(self):
         self.features = None
@@ -71,13 +61,8 @@ class Dataset:
             self.edge_features = np.zeros((len(edge_feats[0]),
                                            len(self.G.nodes()),
                                            len(self.G.nodes())))
-                                        #    int(len(self.G.nodes())/2),
-                                        #    int(len(self.G.nodes())/2)))
-            print(self.edge_features.shape)
             for idx, matrix in enumerate(edge_feats[0]):
-                print(matrix.shape)
                 self.edge_features[idx] = matrix.toarray()
-                # print("--------")
         else:
             self.edge_features = None
         return self.edge_features
@@ -102,3 +87,21 @@ class Dataset:
                 return False
         # print("Pass")
         return True
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Test loading dataset")
+    parser.add_argument('--source_dataset', default="/home/trunght/dataspace/graph/douban/online/graphsage/")
+    parser.add_argument('--target_dataset', default="/home/trunght/dataspace/graph/douban/offline/graphsage/")
+    parser.add_argument('--groundtruth', default="/home/trunght/dataspace/graph/douban/dictionaries/groundtruth")
+    parser.add_argument('--output_dir', default="/home/trunght/dataspace/graph/douban/statistics/")
+    return parser.parse_args()
+
+def main(args):    
+    source_dataset = Dataset(args.source_dataset)
+    target_dataset = Dataset(args.target_dataset)
+    groundtruth = graph_utils.load_gt(args.groundtruth, source_dataset.id2idx, target_dataset.id2idx, "dict")
+    DataPreprocess.evaluateDataset(source_dataset, target_dataset, groundtruth, args.output_dir)
+
+if __name__ == "__main__":
+    args = parse_args()
+    main(args)

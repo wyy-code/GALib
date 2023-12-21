@@ -11,7 +11,6 @@ from encoder.REGAL.xnetmf_config import *
 from scipy.linalg import block_diag
 import scipy.sparse as sps
 import encoder.REGAL.xnetmf as xnetmf
-import decoder.RefiNA.refina as refina
 import encoder.REGAL.regal_utils as regal_utils
 from decoder.RefiNA.RefiNA import RefiNA
 # import decoder.RefiNA.refina as refina

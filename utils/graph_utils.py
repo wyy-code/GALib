@@ -74,4 +74,3 @@ def load_gt(path, id2idx_src, id2idx_trg, format='matrix', convert=False):
                 else:
                     gt[conversion_src(src)] = conversion_trg(trg)
         return gt
-

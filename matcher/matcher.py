@@ -133,8 +133,6 @@ def load_gt(true_align, format='matrix'):
         for src, trg in true_align.items():             
             gt[src, trg] = 1
         return gt
-
-#Tensorflow as background. The Pytorch is the next work.
     
 def sinkhorn_match(sims, batch_size=512):
         results = []
