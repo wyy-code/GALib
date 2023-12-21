@@ -8,7 +8,7 @@ We have developed GALib, an open-source library for network alignment, using Pyt
 
 ## Algorithms
 
-We integrate eleven representative network-alignment as Encoder and Deocder. Their papers and the original codes are given in the following table.
+We integrate eleven representative network-alignment as Encoder and deocder. Their papers and the original codes are given in the following table.
 
 |   Encoder   |     Paper     |     Publish     |
 |:--------:|:------------------------------------:|:------------:|
