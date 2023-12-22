@@ -1,19 +1,12 @@
 import numpy as np
 import argparse
-import networkx as nx
 import time
-import os
-import sys
-import pickle
-from scipy.sparse import csr_matrix, coo_matrix
-from sklearn.neighbors import KDTree
 from encoder.REGAL.xnetmf_config import *
-from scipy.linalg import block_diag
 import scipy.sparse as sps
-import encoder.REGAL.xnetmf as xnetmf
-import encoder.REGAL.regal_utils as regal_utils
 from decoder.RefiNA.RefiNA import RefiNA
 import decoder.refina_utils as refina_utils
+
+from encoder.REGAL.REGAL import REGAL
 from encoder.FINAL.FINAL import FINAL
 from encoder.CONE.CONE import CONE
 from encoder.Grampa.Grampa import Grampa
@@ -26,8 +19,6 @@ import math
 from encoder.gwl import gwl_model
 import torch.optim as optim
 from torch.optim import lr_scheduler
-from matcher import matcher,metrics
-import scipy
 from dataprocess.Dataset import Dataset
 
 def parse_args():
@@ -41,14 +32,8 @@ def parse_args():
     # Embedding Method
     parser.add_argument('--embmethod', nargs='?', default='netMF', help='Node embedding method.')
     # xnetmf parameters
-    parser.add_argument('--attributes', nargs='?', default=None,help='File with saved numpy matrix of node attributes, or int of number of attributes to synthetically generate.  Default is 5 synthetic.')
     parser.add_argument('--attrvals', type=int, default=2,help='Number of attribute values. Only used if synthetic attributes are generated')
-    parser.add_argument('--k', type=int, default=10,help='Controls of landmarks to sample. Default is 10.')
-    parser.add_argument('--untillayer', type=int, default=2,help='Calculation until the layer for xNetMF.')
-    parser.add_argument('--alpha', type=float, default = 0.01, help = "Discount factor for further layers")
-    parser.add_argument('--gammastruc', type=float, default = 1, help = "Weight on structural similarity")
-    parser.add_argument('--gammaattr', type=float, default = 1, help = "Weight on attribute similarity")
-    parser.add_argument('--buckets', default=2, type=float, help="base of log for degree (node feature) binning")
+
     # REFINA parameters
     parser.add_argument('--n-iter', type=int, default=100, help='Maximum #iter for RefiNA. Default is 20.') 
     parser.add_argument('--token-match', type=float, default = -1, help = "Token match score for each node.  Default of -1 sets it to reciprocal of largest graph #nodes rounded up to smallest power of 10")
@@ -66,26 +51,8 @@ def main(args):
     dataset = Dataset(args.combined_graph, args.true_align)
     adjA, adjB = dataset.graph2adj()
 
-    ##################### Proprocess if needed ######################################
-    if (args.embmethod == "xnetMF"):
-        print("Generating xnetMF embeddings for REGAL")
-        adj = block_diag(adjA, adjB)
-        graph = Graph(adj, node_attributes = args.attributes)
-        max_layer = args.untillayer
-        if args.untillayer == 0:
-            max_layer = None
-        if args.buckets == 1:
-            args.buckets = None
-        rep_method = RepMethod(max_layer = max_layer, alpha = args.alpha, k = args.k, num_buckets = args.buckets, #BASE OF LOG FOR LOG SCALE
-            normalize = True, gammastruc = args.gammastruc, gammaattr = args.gammaattr)
-        if max_layer is None:
-            max_layer = 1000
-        print("Learning representations with max layer %d and alpha = %f" % (max_layer, args.alpha))
-        embed = xnetmf.get_representations(graph, rep_method)
-        # if (args.store_emb):
-        #     np.save(args.embeddingA, embed, allow_pickle=False)
-        #     np.save(args.embeddingB, embed, allow_pickle=False)
-    elif (args.embmethod == "gwl"):
+
+    if (args.embmethod == "gwl"):
         # parse the data to be gwl readable format
         print("Parse the data to be gwl readable format")
         data_gwl = {}
@@ -113,8 +80,8 @@ def main(args):
     before_align = time.time()
     # step2 and 3: align embedding spaces and match nodes with similar embeddings
     if args.alignmethod == 'REGAL':
-        emb1, emb2 = regal_utils.get_embeddings(embed, graph_split_idx=adjA.shape[0])
-        alignment_matrix = regal_utils.get_embedding_similarities(emb1, emb2, num_top = None)
+        encoder = REGAL(adjA, adjB)
+        alignment_matrix = encoder.align()
     elif args.alignmethod == 'FINAL':
         encoder = FINAL(adjA, adjB)
         alignment_matrix = encoder.align()

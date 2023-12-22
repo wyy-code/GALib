@@ -31,7 +31,6 @@ def get_embedding_similarities(embed, embed2 = None, sim_measure = "euclidean", 
 def get_embeddings(combined_embed, graph_split_idx = None):
     if graph_split_idx is None:
         graph_split_idx = int(combined_embed.shape[0] / 2)
-    dim = combined_embed.shape[1]
     embed1 = combined_embed[:graph_split_idx]
     embed2 = combined_embed[graph_split_idx:]
 

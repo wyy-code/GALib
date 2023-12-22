@@ -1,14 +1,11 @@
 import numpy as np
 import sklearn.metrics.pairwise
 import scipy.sparse as sps
-import argparse
-import time
-from scipy.sparse import csr_matrix, coo_matrix
-from sklearn.neighbors import KDTree
 from encoder.network_alignment_model import NetworkAlignmentModel
 # from data import ReadFile
 from . import unsup_align, embedding
 #original code from https://github.com/GemsLab/CONE-Align
+from utils.encoder_utils import kd_align
 
 class CONE(NetworkAlignmentModel):
     def __init__(self, adjA, adjB, dim=64,window=10,negative=1.0,niter_init=10,reg_init=1.0, \
@@ -113,81 +110,6 @@ def align_embeddings(embed1, embed2, CONE_args, adj1=None, adj2=None, struc_embe
     #     if CONE_args['numtop'] is not None:
     alignment_matrix = kd_align(
         aligned_embed1, embed2, distance_metric=CONE_args['embsim'], num_top=CONE_args['numtop'])
-    # # All pairwise distance computation
-    # else:
-    #     if CONE_args['embsim'] == "cosine":
-    #         alignment_matrix = sklearn.metrics.pairwise.cosine_similarity(
-    #             aligned_embed1, embed2)
-    #     else:
-    #         alignment_matrix = sklearn.metrics.pairwise.euclidean_distances(
-    #             aligned_embed1, embed2)
-    #         alignment_matrix = np.exp(-alignment_matrix)
+
     return alignment_matrix, sklearn.metrics.pairwise.euclidean_distances(aligned_embed1, embed2)
 
-
-
-
-def kd_align(emb1, emb2, normalize=False, distance_metric="euclidean", num_top=10):
-    kd_tree = KDTree(emb2, metric=distance_metric)
-
-    row = np.array([])
-    col = np.array([])
-    data = np.array([])
-
-    dist, ind = kd_tree.query(emb1, k=num_top)
-    # print("queried alignments")
-    row = np.array([])
-    for i in range(emb1.shape[0]):
-        row = np.concatenate((row, np.ones(num_top) * i))
-    col = ind.flatten()
-    data = np.exp(-dist).flatten()
-    sparse_align_matrix = coo_matrix(
-        (data, (row, col)), shape=(emb1.shape[0], emb2.shape[0]))
-    return sparse_align_matrix.tocsr()
-
-
-def main(data, **args):
-
-    Src = data['Src']
-    Tar = data['Tar']
-
-    # min_dim = min(Src.shape[0] - 1, Tar.shape[0] - 1)
-    # if args['dim'] > min_dim:
-    #     args['dim'] = min_dim
-
-    if args['dim'] > Src.shape[0] - 1:
-        args['dim'] = Src.shape[0] - 1
-
-    # global args
-    # args = parse_args()
-
-    # node_num = int(adj.shape[0] / 2)
-    # Tar = adj[:node_num, :node_num]
-    # Src = adj[node_num:, node_num:]
-    # Tar= ReadFile.edgelist_to_adjmatrix1("data/noise_level_1/arenas_orig.txt")
-    # Src = ReadFile.edgelist_to_adjmatrix1("data/noise_level_1/edges_4.txt")
-    start = time.time()
-   # step1: obtain normalized proximity-preserving node embeddings
-    # if (args.embmethod == "netMF"):
-    print("0")
-    emb_matrixA = embedding.netmf(
-        Src, dim=args['dim'], window=args['window'], b=args['negative'], normalize=True)
-    print("A")
-    emb_matrixB = embedding.netmf(
-        Tar, dim=args['dim'], window=args['window'], b=args['negative'], normalize=True)
-    print("B")
-
-    # step2 and 3: align embedding spaces and match nodes with similar embeddings
-    alignment_matrix, cost_matrix = align_embeddings(
-        emb_matrixA,
-        emb_matrixB,
-        args,
-        adj1=csr_matrix(Src),
-        adj2=csr_matrix(Tar),
-        struc_embed=None,
-        struc_embed2=None
-    )
-    total_time = time.time() - start
-    print(("time for CONE-align (in seconds): %f" % total_time))
-
-    return alignment_matrix, cost_matrix
