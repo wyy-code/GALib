@@ -7,7 +7,6 @@ from decoder.RefiNA.RefiNA import RefiNA
 import decoder.refina_utils as refina_utils
 
 from encoder.REGAL.REGAL import REGAL
-from encoder.FINAL.FINAL import FINAL
 from encoder.CONE.CONE import CONE
 from encoder.Grampa.Grampa import Grampa
 from encoder.IsoRank.IsoRank import IsoRank
@@ -20,6 +19,8 @@ from encoder.gwl import gwl_model
 import torch.optim as optim
 from torch.optim import lr_scheduler
 from dataprocess.Dataset import Dataset
+
+from matcher.metrics import get_statistics
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Run CONE Align.")
@@ -52,6 +53,10 @@ def main(args):
     adjA, adjB = dataset.graph2adj()
 
 
+    # Generate prior embedding
+
+
+
     if (args.embmethod == "gwl"):
         # parse the data to be gwl readable format
         print("Parse the data to be gwl readable format")
@@ -82,8 +87,6 @@ def main(args):
     if args.alignmethod == 'REGAL':
         encoder = REGAL(adjA, adjB)
         alignment_matrix = encoder.align()
-    elif args.alignmethod == 'FINAL':
-        encoder = FINAL(adjA, adjB)
         alignment_matrix = encoder.align()
     elif args.alignmethod == 'IsoRank':
         encoder = IsoRank(adjA, adjB)
@@ -166,16 +169,7 @@ def main(args):
         print("Top 1 accuracy: %.5f" % score)
         print("MNC: %.5f" % mnc)
 
-        # pred = matcher.greedy_match(alignment_matrix)
-        # print(pred.shape)
-        # print(len(true_align))
 
-        # groundtruth_matrix = matcher.load_gt(true_align)
-        # metrics.get_statistics(pred, groundtruth_matrix)
-
-        # matcher.sinkhorn_match(alignment_matrix)
-        # greedy_match_acc = metrics.get_statistics(pred, groundtruth_matrix)
-        # print("Accuracy: %.4f" % greedy_match_acc)
 
 
     # evaluation

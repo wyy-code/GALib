@@ -33,18 +33,29 @@ def build_clustering(G, id2idx):
         clustering[id2idx[id]] = val
     return clustering
 
-def get_H(path, source_dataset, target_dataset):
+
+def get_degree_similarity(A1, A2):
+    """
+    Computes the degree similarity matrix of two graphs based on their adjacency matrices.
+
+    Parameters:
+        A1 (numpy.ndarray): The adjacency matrix of the first graph.
+        A2 (numpy.ndarray): The adjacency matrix of the second graph.
+
+    Returns:
+        numpy.ndarray: The degree similarity matrix.
+    """
+    degree_matrix_A1 = np.sum(A1, axis=1).reshape(-1, 1)
+    degree_matrix_A2 = np.sum(A2, axis=1).reshape(1, -1)
+    # min_degrees = np.minimum(degree_matrix_A1, degree_matrix_A2)
+    # max_degrees = np.maximum(degree_matrix_A1, degree_matrix_A2)
+    # degree_similarity_matrix = min_degrees / max_degrees
+    degree_similarity_matrix = degree_matrix_A1 @ degree_matrix_A2
+
+
+    return degree_similarity_matrix
     
-    if path is None:    
-        H = np.ones((len(target_dataset.G.nodes()), len(source_dataset.G.nodes())))
-        H = H*(1/len(source_dataset.G.nodes()))
-        return H
-    else:    
-        if not os.path.exists(path):
-            raise Exception("Path '{}' is not exist".format(path))
-        dict_H = loadmat(path)
-        H = dict_H['H']
-        return H
+
 
 def get_edges(G, id2idx):
     edges1 = [(id2idx[n1], id2idx[n2]) for n1, n2 in G.edges()]
