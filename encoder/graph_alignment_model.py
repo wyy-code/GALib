@@ -1,6 +1,6 @@
 from abc import ABCMeta
 
-class NetworkAlignmentModel:
+class GraphAlignmentModel:
     __metaclass__ = ABCMeta
 
     def __init__(self, source_dataset, target_dataset):

@@ -1,11 +1,11 @@
 import numpy as np
 import numpy.matlib as matlib
 from scipy.sparse.linalg import svds
-from encoder.network_alignment_model import NetworkAlignmentModel
+from encoder.graph_alignment_model import GraphAlignmentModel
 from input.dataset import Dataset
 import networkx as nx
 
-class BigAlign(NetworkAlignmentModel):
+class BigAlign(GraphAlignmentModel):
     def __init__(self, adjA, adjB, lamb=0.01):
         """
         data1: object of Dataset class, contains information of source network

@@ -20,8 +20,8 @@
 # --refinemethod RefiNA
 
 python run.py \
---true_align data/arenas/arenas_edges-mapping-permutation.txt \
---combined_graph data/arenas/arenas_combined_edges.txt \
+--true_align data/Magna/Magna-Magna_edges-mapping-permutation.txt \
+--combined_graph data/Magna/Magna-Magna_combined_edges.txt \
 --embmethod xnetMF \
---alignmethod IsoRank \
+--alignmethod BigAlign \
 # --refinemethod RefiNA

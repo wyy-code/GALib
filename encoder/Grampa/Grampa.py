@@ -11,13 +11,13 @@ import scipy as sci
 from numpy import inf, nan
 import scipy.sparse as sps
 import math
-from encoder.network_alignment_model import NetworkAlignmentModel
+from encoder.graph_alignment_model import GraphAlignmentModel
 
 #from lapsolver import solve_dense
 import scipy as sci
 #from lapsolver import solve_dense
 
-class Grampa(NetworkAlignmentModel):
+class Grampa(GraphAlignmentModel):
     def __init__(self, adjA, adjB, lalpha=1, eta=0.2):
         """
         data1: object of Dataset class, contains information of source network

@@ -1,9 +1,9 @@
 import numpy as np
 from numpy import inf, nan
-from encoder.network_alignment_model import NetworkAlignmentModel
+from encoder.graph_alignment_model import GraphAlignmentModel
 from utils.graph_utils import get_degree_similarity
 
-class IsoRank(NetworkAlignmentModel):
+class IsoRank(GraphAlignmentModel):
 
     """
     Description:
@@ -24,7 +24,7 @@ class IsoRank(NetworkAlignmentModel):
       Proceedings of the National Academy of Sciences 105.35 (2008): 12763-12768.
     """
 
-    def __init__(self, adjA, adjB, H=None, alpha=0.82, maxiter=100, tol=1e-4):
+    def __init__(self, adjA, adjB, H=None, alpha=0.82, maxiter=30, tol=1e-4):
  
         self.alignment_matrix = None
         self.A1 = adjA

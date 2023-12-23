@@ -5,11 +5,11 @@ from scipy.linalg import lu
 from scipy.linalg._expm_frechet import vec
 #original code https://github.com/nassarhuda/lowrank_spectral
 from . import decomposeX, newbound_methods
-from encoder.network_alignment_model import NetworkAlignmentModel
+from encoder.graph_alignment_model import GraphAlignmentModel
 # from .. import bipartiteMatching
 from .. import bipartitewrapper as bmw
 
-class LREA(NetworkAlignmentModel):
+class LREA(GraphAlignmentModel):
     def __init__(self, adjA, adjB, iters=20, method="lowrank_svd_union", bmatch=3):
         """
  

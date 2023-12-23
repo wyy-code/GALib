@@ -12,11 +12,11 @@ import matplotlib.pyplot as plt
 #import munkres
 from . import base_align as ba
 #import base_align as ba
-from encoder.network_alignment_model import NetworkAlignmentModel
+from encoder.graph_alignment_model import GraphAlignmentModel
 from sklearn.neighbors import NearestNeighbors
 
 
-class Grasp(NetworkAlignmentModel):
+class Grasp(GraphAlignmentModel):
     def __init__(self, adjA, adjB, q=20, k=5, laa=1, lower_t=0.01, upper_t=1.0, linsteps=True, base_align=False):
         """
         laa：Linear assignment algorithm. 1=nn,2=sortgreedy, 3=jv

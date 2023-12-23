@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 #import base_align as ba
 #import munkres
 from . import base_align_pymanopt as ba
-from encoder.network_alignment_model import NetworkAlignmentModel
+from encoder.graph_alignment_model import GraphAlignmentModel
 #import base_align as ba
 
 from sklearn.neighbors import NearestNeighbors
@@ -29,7 +29,7 @@ from sklearn.neighbors import NearestNeighbors
 # 			print('Noise level %d, round %d' %(i,j))
 
 
-class Grasp(NetworkAlignmentModel):
+class Grasp(GraphAlignmentModel):
     def __init__(self, adjA, adjB, q=20, k=5, laa=1, lower_t=0.01, upper_t=1.0, linsteps=True, base_align=False):
         """
         laa：Linear assignment algorithm. 1=nn,2=sortgreedy, 3=jv

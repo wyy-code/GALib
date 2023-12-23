@@ -1,10 +1,10 @@
 import numpy as np
 import scipy.sparse as sps
 from math import floor, log2
-from encoder.network_alignment_model import NetworkAlignmentModel
+from encoder.graph_alignment_model import GraphAlignmentModel
 #original code from https://github.com/nassarhuda/NetworkAlignment.jl/blob/master/src/NSD.jl
 
-class NSD(NetworkAlignmentModel):
+class NSD(GraphAlignmentModel):
     def __init__(self, adjA, adjB, alpha=0.8, iters=20, weighted=True):
         """
  

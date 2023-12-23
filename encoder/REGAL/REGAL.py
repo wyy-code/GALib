@@ -4,10 +4,10 @@ from utils.encoder_utils import kd_align
 from scipy.linalg import block_diag
 from .xnetmf_config import *
 import encoder.REGAL.xnetmf as xnetmf
-from encoder.network_alignment_model import NetworkAlignmentModel
+from encoder.graph_alignment_model import GraphAlignmentModel
 
 
-class REGAL(NetworkAlignmentModel):
+class REGAL(GraphAlignmentModel):
     def __init__(self, adjA, adjB, attributes=None, untillayer=2, buckets=2, alpha=0.01, 
                  k=10, gammastruc=1, gammaattr=1, graph_split_idx=None):
 

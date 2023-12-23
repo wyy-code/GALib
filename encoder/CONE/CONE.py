@@ -1,13 +1,13 @@
 import numpy as np
 import sklearn.metrics.pairwise
 import scipy.sparse as sps
-from encoder.network_alignment_model import NetworkAlignmentModel
+from encoder.graph_alignment_model import GraphAlignmentModel
 # from data import ReadFile
 from . import unsup_align, embedding
 #original code from https://github.com/GemsLab/CONE-Align
 from utils.encoder_utils import kd_align
 
-class CONE(NetworkAlignmentModel):
+class CONE(GraphAlignmentModel):
     def __init__(self, adjA, adjB, dim=64,window=10,negative=1.0,niter_init=10,reg_init=1.0, \
                  lr=1.0,bsz=10,nepoch=5,embsim="euclidean",numtop=10,reg_align=0.05,niter_align=10):
         """
