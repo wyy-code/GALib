@@ -4,6 +4,7 @@ from scipy.sparse.linalg import svds
 from encoder.graph_alignment_model import GraphAlignmentModel
 from input.dataset import Dataset
 import networkx as nx
+from scipy.sparse import csr_matrix
 
 class BigAlign(GraphAlignmentModel):
     def __init__(self, adjA, adjB, lamb=0.01):
@@ -69,4 +70,10 @@ class BigAlign(GraphAlignmentModel):
         X = N1.T.dot(u).dot(S).dot(u.T)
         Y = lamb / 2 * np.sum(u.dot(S).dot(u.T), axis=0)
         P = N2.dot(X) - matlib.repmat(Y, n2, 1)
-        return P.T  # map from source to target
+        P = P.T
+
+        row, col = np.nonzero(P)
+        values = P[row, col]
+        csr_p = csr_matrix((values, (row, col)), shape=(P.shape[0],P.shape[0]))
+
+        return csr_p   # map from source to target

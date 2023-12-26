@@ -102,7 +102,7 @@ class LREA(GraphAlignmentModel):
         else:
             print(
                 "method should be one of the following: (1)eigenalign,(2)lowrank_unbalanced_best, (3)lowrank_unbalanced_union,(4)lowrank_balanced_best, (5)lowrank_balanced_union,(6)lowrank_Wkdecomposed_best, (7)lowrank_Wkdecomposed_union")
-        Sim = scipy.sparse.csr_matrix((nzv, (nzi, nzj))).todense()
+        Sim = scipy.sparse.csr_matrix((nzv, (nzi, nzj)))
 
         return Sim
     

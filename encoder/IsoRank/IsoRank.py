@@ -2,6 +2,7 @@ import numpy as np
 from numpy import inf, nan
 from encoder.graph_alignment_model import GraphAlignmentModel
 from utils.graph_utils import get_degree_similarity
+from scipy.sparse import csr_matrix
 
 class IsoRank(GraphAlignmentModel):
 
@@ -67,6 +68,7 @@ class IsoRank(GraphAlignmentModel):
                 break
 
         self.alignment_matrix = S.T
+
         return self.alignment_matrix
 
     def get_alignment_matrix(self):

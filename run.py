@@ -106,9 +106,6 @@ def main(args):
     elif args.alignmethod == 'LREA':
         encoder = LREA(adjA, adjB)
         alignment_matrix = encoder.align()
-    elif args.alignmethod == 'Grasp':
-        encoder = Grasp(adjA, adjB)
-        alignment_matrix = encoder.align()
         
     elif args.alignmethod == "gwl":
         result_folder = 'gwl_test'
@@ -161,6 +158,7 @@ def main(args):
                 print(f"args.refinemethod is {args.refinemethod}")    
     node_num = alignment_matrix.shape[0]
     after_align = time.time()
+    
 
 
     if dataset.groundtruth is not None:
