@@ -27,7 +27,7 @@ We integrate eleven representative network-alignment as Encoder and deocder. The
 |  RefiNA  |         Refining Network Alignment to Improve Matched Neighborhood Consistency           |  [SDM'2021](https://epubs.siam.org/doi/abs/10.1137/1.9781611976700.20)  |
 |  CAPER  |         CAPER: Coarsen, Align, Project, Refine - A General Multilevel Framework for Network Alignment           |  [arXiv'2022](https://arxiv.org/abs/2208.10682)  |
 |  Greed-Match  |         -           |  [-](-)   |
-|  Sinkhorn  |         -           | [-](-)  |
+|  Sinkhorn  |        From Alignment to Assignment: Frustratingly Simple Unsupervised Entity Alignment         | [EMNLP'2021](https://arxiv.org/abs/2109.02363)  |
 
 ## Datasets
 
